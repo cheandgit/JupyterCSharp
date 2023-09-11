@@ -1,0 +1,75 @@
+
+#r "nuget: Plotly.NET, 4.0.0"
+#r "nuget: Plotly.NET.CSharp"
+#r "nuget: Plotly.NET.Interactive, 4.0.0"
+
+using Plotly.NET.CSharp;
+
+var x = Enumerable.Range(1, 63).Select(x => x * 0.1);
+var y = x.Select(x => System.Math.Sin(x));
+
+Chart.Scatter<double,double,string>(
+    x: x,
+    y: y,
+    mode: Plotly.NET.StyleParam.Mode.Markers
+)
+
+or 
+
+Chart.Scatter<double,double,string>(x, y, mode: Plotly.NET.StyleParam.Mode.Markers)
+
+
+//-----------------------------------------------------------------------------
+// 2-я версия
+//-----------------------------------------------------------------------------
+
+#r "nuget: Plotly.NET, 4.0.0"
+#r "nuget: Plotly.NET.CSharp"
+#r "nuget: Plotly.NET.Interactive, 4.0.0"
+
+using Plotly.NET.CSharp;
+
+var x = Enumerable.Range(0, 64).Select(x => x * 0.1);
+var y = x.Select(x => System.Math.Sin(x));
+
+Chart.Line<double, double, string>(x, y)
+
+or
+
+Chart.Line<double, double, string>(
+    x: x,
+    y: y,
+    LineColor: Plotly.NET.Color.fromString("Green"),
+    LineWidth: 5.0,
+    LineDash: Plotly.NET.StyleParam.DrawingStyle.Dot
+)
+
+//-----------------------------------------------------------------------------
+// 3-я версия
+//-----------------------------------------------------------------------------
+#r "nuget: Plotly.NET, 4.0.0"
+#r "nuget: Plotly.NET.CSharp"
+#r "nuget: Plotly.NET.Interactive, 4.0.0"
+
+using Plotly.NET.CSharp;
+
+var x = Enumerable.Range(0, 64).Select(x => x * 0.1);
+var y = x.Select(x => System.Math.Sin(x));
+
+Chart.Line<double, double, string>(x: x, y: y,
+    ShowMarkers: true, 
+    MarkerSymbol: Plotly.NET.StyleParam.MarkerSymbol.Square,
+    MarkerColor: Plotly.NET.Color.fromString("Red"),
+    LineColor: Plotly.NET.Color.fromString("Blue")
+)
+    .WithXAxisStyle<string, string, string>(TitleText: "time [s]")
+    .WithYAxisStyle<string, string, string>(TitleText: "some observation value")
+
+
+
+//-----------------------------------------------------------------------------
+Scatter Plots In F# And C# Using Plotly.NET
+https://fslab.org/blog/graph-gallery/scatter/fsharp.html
+
+Plotly.NET provides functions for generating and rendering plotly.js charts in .NET programming languages
+https://plotly.net/
